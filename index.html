@@ -57,6 +57,12 @@
   .sched b{color:var(--navy);}
   .note{font-size:.8rem; color:#777; line-height:1.5;}
   .note a{color:var(--green); font-weight:700; text-decoration:none;}
+  .reclist{margin:0 0 16px; text-align:left;}
+  .reclist .rt{font-weight:800; color:var(--gold-dark); letter-spacing:.08em; font-size:.78rem; text-transform:uppercase; margin-bottom:10px; text-align:center;}
+  .recrow{display:flex; align-items:center; justify-content:space-between; gap:10px; background:var(--cream); border:1px solid #e2d5ae; border-radius:10px; padding:10px 12px; margin-bottom:8px;}
+  .recrow .rl{font-size:.86rem; font-weight:700; color:var(--navy);}
+  .recrow .ro{background:linear-gradient(135deg,#e6c866,#b08d2e); color:var(--navy); font-weight:800; font-size:.78rem; padding:8px 16px; border-radius:999px; text-decoration:none; white-space:nowrap;}
+  .recrow .ro:active{transform:scale(.97);}
   .foot{margin-top:14px; font-size:.72rem; letter-spacing:.18em; color:var(--gold-dark); text-transform:uppercase;}
   form{text-align:left;}
   .fld{margin-bottom:14px;}
@@ -142,7 +148,7 @@
       <div class="tick">✓</div>
       <h1>Registration Confirmed!</h1>
       <p class="sub"><b>RICHWEALTH 2.0</b> — Live Online Webinar Week<br><b>19 – 26 July 2026</b></p>
-      <div class="linkbox">
+      <div class="linkbox" style="display:none">
         <div class="lbl">Your Webinar Joining Link</div>
         <div class="day" id="daylabel"></div>
         <a id="wlink" href="#" target="_blank" rel="noopener"></a>
@@ -151,13 +157,17 @@
           <a class="btn btn-open" id="openbtn" href="#" target="_blank" rel="noopener">▶ OPEN</a>
         </div>
       </div>
-      <div class="sched">
+      <div class="reclist">
+        <div class="rt">📺 All Sessions — Watch Anytime</div>
+        <div id="recrows"></div>
+      </div>
+      <div class="sched" style="display:none">
         <div class="t">Webinar Timings</div>
         <b>Sunday:</b> 11:00 AM – 1:00 PM &nbsp;·&nbsp; <b>Mon – Sat:</b> 3:00 PM – 5:00 PM
       </div>
-      <p class="note">This is the joining link for the <b>current session</b>. Every day's new link
-      will also be sent to you on your <b>WhatsApp number</b>.<br>
-      Need help? Call / WhatsApp <a href="https://wa.me/919913121121">+91 99131 21121</a></p>
+      <p class="note">All sessions from our webinar week are now available above — <b>watch again anytime</b>.
+      Have any questions? Feel free to <b>ask us</b> — we're always here for our family.<br>
+      Call / WhatsApp <a href="https://wa.me/919913121121">+91 99131 21121</a></p>
     </div>
 
     <div class="foot">Richwealth · 15 Years of Trust · 19 States · 200+ Cities</div>
@@ -199,6 +209,27 @@ document.getElementById("daylabel").textContent = sel.label;
 var wl = document.getElementById("wlink");
 wl.textContent = url; wl.href = url;
 document.getElementById("openbtn").href = url;
+
+var RECORDINGS = [
+  {label:"Day 2 · 20 July",         id:"fyeXxwuZfV8"},
+  {label:"Day 3 · 21 July",         id:"fVTZfb_ofU8"},
+  {label:"Day 4 · 22 July",         id:"UD_heFMlTMY"},
+  {label:"Day 5 · 23 July",         id:"m0adlB7PqQ8"},
+  {label:"Day 6 · 24 July",         id:"ZbKgbItctCc"},
+  {label:"Day 7 · 25 July",         id:"oyTFNFOb2FI"},
+  {label:"Day 8 Finale · 26 July",  id:"vL1ornbGfUA"}
+];
+(function(){
+  var box = document.getElementById("recrows");
+  if(!box) return;
+  var html = "";
+  for(var i=0;i<RECORDINGS.length;i++){
+    var u = "https://youtube.com/watch?v=" + RECORDINGS[i].id;
+    html += '<div class="recrow"><span class="rl">' + RECORDINGS[i].label + '</span>' +
+            '<a class="ro" href="' + u + '" target="_blank" rel="noopener">▶ WATCH</a></div>';
+  }
+  box.innerHTML = html;
+})();
 
 function showConfirm(){
   document.getElementById("formview").style.display = "none";
